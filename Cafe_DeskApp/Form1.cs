@@ -20,6 +20,8 @@ namespace Cafe_DeskApp
 			InitializeComponent();
 		}
 
+		
+
 		public void ucControlList (UserControl controls)
 		{
 			controls.Dock = DockStyle.Fill;
@@ -49,10 +51,7 @@ namespace Cafe_DeskApp
 					PnlUsers.BackColor = Color.MediumSeaGreen; break;
 				case "BtnActions":
 					ucControlList(new UCActions());
-					PnlActions.BackColor = Color.MediumSeaGreen; break;
-				case "BtnInfo":
-					ucControlList(new UCInfo());
-					PnlInfo.BackColor = Color.MediumSeaGreen; break;
+					PnlActions.BackColor = Color.MediumSeaGreen; break;				
 			}
 		}
 

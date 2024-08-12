@@ -73,12 +73,6 @@
     <Compile Include="UserControls\UCHome.Designer.cs">
       <DependentUpon>UCHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UCInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UCInfo.Designer.cs">
-      <DependentUpon>UCInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\UCRegister.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -109,9 +103,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCHome.resx">
       <DependentUpon>UCHome.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UCInfo.resx">
-      <DependentUpon>UCInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCRegister.resx">
       <DependentUpon>UCRegister.cs</DependentUpon>

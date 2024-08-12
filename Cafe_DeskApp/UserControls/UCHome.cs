@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,5 +22,13 @@ namespace Cafe_DeskApp.UserControls
 		{
 
 		}
-	}
+
+        private void PnlHome_Load(object sender, PaintEventArgs e)
+        {
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Users", "Data Source=HP\\SQLEXPRESS;Initial Catalog=CoffeeApp;Integrated Security=True");
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Users");
+            HomeDataGridView.DataSource = ds.Tables["Users"].DefaultView;
+        }
+    }
 }

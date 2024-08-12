@@ -28,54 +28,58 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.PnlUcHome = new System.Windows.Forms.Panel();
-			this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.dataSet1 = new System.Data.DataSet();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.PnlUcHome.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// PnlUcHome
-			// 
-			this.PnlUcHome.Controls.Add(this.dataGridView1);
-			this.PnlUcHome.Dock = System.Windows.Forms.DockStyle.Top;
-			this.PnlUcHome.Location = new System.Drawing.Point(0, 0);
-			this.PnlUcHome.Name = "PnlUcHome";
-			this.PnlUcHome.Size = new System.Drawing.Size(1000, 555);
-			this.PnlUcHome.TabIndex = 0;
-			// 
-			// usersBindingSource
-			// 
-			this.usersBindingSource.DataMember = "Users";
-			// 
-			// dataSet1
-			// 
-			this.dataSet1.DataSetName = "NewDataSet";
-			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Location = new System.Drawing.Point(347, 116);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-			this.dataGridView1.TabIndex = 0;
-			// 
-			// UCHome
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.PnlUcHome);
-			this.Name = "UCHome";
-			this.Size = new System.Drawing.Size(1000, 555);
-			this.PnlUcHome.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			this.ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            this.PnlUcHome = new System.Windows.Forms.Panel();
+            this.HomeDataGridView = new System.Windows.Forms.DataGridView();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new System.Data.DataSet();
+            this.PnlUcHome.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.HomeDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // PnlUcHome
+            // 
+            this.PnlUcHome.Controls.Add(this.HomeDataGridView);
+            this.PnlUcHome.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PnlUcHome.Location = new System.Drawing.Point(0, 0);
+            this.PnlUcHome.Name = "PnlUcHome";
+            this.PnlUcHome.Size = new System.Drawing.Size(1000, 555);
+            this.PnlUcHome.TabIndex = 0;
+            this.PnlUcHome.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlHome_Load);
+            // 
+            // HomeDataGridView
+            // 
+            this.HomeDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.HomeDataGridView.BackgroundColor = System.Drawing.Color.Silver;
+            this.HomeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.HomeDataGridView.Location = new System.Drawing.Point(68, 41);
+            this.HomeDataGridView.Name = "HomeDataGridView";
+            this.HomeDataGridView.ReadOnly = true;
+            this.HomeDataGridView.Size = new System.Drawing.Size(844, 382);
+            this.HomeDataGridView.TabIndex = 0;
+            // 
+            // usersBindingSource
+            // 
+            this.usersBindingSource.DataMember = "Users";
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "NewDataSet";
+            // 
+            // UCHome
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PnlUcHome);
+            this.Name = "UCHome";
+            this.Size = new System.Drawing.Size(1000, 555);
+            this.PnlUcHome.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.HomeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 
@@ -89,6 +93,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn cityDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource usersBindingSource;
 		private System.Data.DataSet dataSet1;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView HomeDataGridView;
 	}
 }

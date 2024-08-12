@@ -22,8 +22,9 @@ namespace Cafe_DeskApp.UserControls
 		}
 
 		private void GetUsersBtn_click(object sender, EventArgs e)
-		{
-			GetUsersEvent();
+		{            
+            this.InitializeComponent();
+            GetUsersEvent();
 			DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn
 			{
 				Text = "Delete",
