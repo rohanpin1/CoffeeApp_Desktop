@@ -22,7 +22,8 @@ namespace Cafe_DeskApp.UserControls
 		}
 
 		private void GetUsersBtn_click(object sender, EventArgs e)
-		{            
+		{
+            this.Controls.Clear();
             this.InitializeComponent();
             GetUsersEvent();
 			DataGridViewButtonColumn btnDelete = new DataGridViewButtonColumn
@@ -46,10 +47,8 @@ namespace Cafe_DeskApp.UserControls
 		}
 
 		private void GetUsersEvent()
-		{
-			HttpClient client = new HttpClient();
-			client.BaseAddress = new Uri(GeneralParams.Uri);
-			HttpResponseMessage res = client.GetAsync("GetUsers").Result;
+		{			
+			HttpResponseMessage res = GeneralParams.HttpCall().GetAsync("GetUsers").Result;
 
 			var users = res.Content.ReadAsStringAsync().Result;
 			var resutl = JsonConvert.DeserializeObject<List<Users>>(users);
@@ -65,10 +64,8 @@ namespace Cafe_DeskApp.UserControls
 				var id = UsersDataGrid.Rows[e.RowIndex].Cells["Id"].Value;
 
 				if (MessageBox.Show("Are You Sure you want to delete this row?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-				{					
-					HttpClient client = new HttpClient();
-					client.BaseAddress = new Uri(GeneralParams.Uri);
-					HttpResponseMessage res = client.DeleteAsync($"DeleteUser?id={id}").Result;
+				{	
+					HttpResponseMessage res = GeneralParams.HttpCall().DeleteAsync($"DeleteUser?id={id}").Result;
 
 					GetUsersEvent();
 				}
@@ -79,9 +76,8 @@ namespace Cafe_DeskApp.UserControls
 				try
 				{
 					var id = UsersDataGrid.Rows[e.RowIndex].Cells["Id"].Value;
-					HttpClient client = new HttpClient();
-					client.BaseAddress = new Uri(GeneralParams.Uri);
-					HttpResponseMessage res = client.GetAsync($"GetUser?id={id}").Result;
+					
+					HttpResponseMessage res = GeneralParams.HttpCall().GetAsync($"GetUser?id={id}").Result;
 
 					var users = res.Content.ReadAsStringAsync().Result;
 					var resutl = JsonConvert.DeserializeObject<Users>(users);

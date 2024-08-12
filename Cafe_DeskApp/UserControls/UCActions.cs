@@ -38,11 +38,8 @@ namespace Cafe_DeskApp.UserControls
 				user.Id =Convert.ToInt32(UserId.Text);
 				string json = JsonConvert.SerializeObject(user);
 				StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-
-				HttpClient client = new HttpClient();
-				client.BaseAddress = new Uri(GeneralParams.Uri);
-				HttpResponseMessage res = client.PostAsync($"UpdateUser", content).Result;
+												
+				HttpResponseMessage res = GeneralParams.HttpCall().PostAsync($"UpdateUser", content).Result;
 
 				MessageBox.Show("Updated Successfully!");
 				this.Controls.Clear();
@@ -71,6 +68,12 @@ namespace Cafe_DeskApp.UserControls
 			PnlUcActions.Controls.Clear();
 			PnlUcActions.Controls.Add(ucControl);
 			ucControl.BringToFront();
-		}
-	}
+		}       
+
+        private void EditByIdBtn_Click(object sender, EventArgs e)
+        {
+            EditForm ef = new EditForm();
+            ef.Show();
+        }
+    }
 }
