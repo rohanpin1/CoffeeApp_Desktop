@@ -74,10 +74,17 @@ namespace Cafe_DeskApp
 						var checkTFA = new SqlCommand("select count(1) from authenticateusers where username = @username and IsTwoFA = 1", conn);
                         checkTFA.Parameters.AddWithValue("@username", UsernameInput.Text.ToString());
 						userCount = (int)checkTFA.ExecuteScalar();
+						if(userCount > 0)
+						{
+							string email = UsernameInput.Text.ToString();
 
-                        ucControlList(new UCHome());
-						PnlHome.BackColor = Color.MediumSeaGreen;
-						PnlTop.Visible = true;							
+							TFAform form = new TFAform(email, this);
+							form.Show();
+						}
+						else
+						{
+							OpenUCHome();
+						}
 					}
 					else
 					{						
@@ -95,6 +102,13 @@ namespace Cafe_DeskApp
         {
 			LoginRegistrationForm form = new LoginRegistrationForm();
 			form.Show();
+        }
+
+		public void OpenUCHome()
+		{
+            ucControlList(new UCHome());
+            PnlHome.BackColor = Color.MediumSeaGreen;
+            PnlTop.Visible = true;
         }
     }
 }

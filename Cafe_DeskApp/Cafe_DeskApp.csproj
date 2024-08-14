@@ -74,6 +74,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DBConnection.cs" />
     <Compile Include="Services\GeneralParams.cs" />
+    <Compile Include="TFAform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TFAform.Designer.cs">
+      <DependentUpon>TFAform.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCActions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -117,6 +123,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TFAform.resx">
+      <DependentUpon>TFAform.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCActions.resx">
       <DependentUpon>UCActions.cs</DependentUpon>
     </EmbeddedResource>
