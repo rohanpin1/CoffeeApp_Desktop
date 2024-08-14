@@ -30,8 +30,6 @@
 		{
             this.PnlControls = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.Logo = new System.Windows.Forms.PictureBox();
-            this.BtnExit = new System.Windows.Forms.PictureBox();
             this.PnlTop = new System.Windows.Forms.TableLayoutPanel();
             this.PnlActions = new System.Windows.Forms.Panel();
             this.BtnActions = new System.Windows.Forms.Button();
@@ -47,10 +45,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.UsernameInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.RegistrationBtnLink = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Logo = new System.Windows.Forms.PictureBox();
+            this.BtnExit = new System.Windows.Forms.PictureBox();
             this.PnlControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnExit)).BeginInit();
             this.PnlTop.SuspendLayout();
             this.PnlActions.SuspendLayout();
             this.PnlUsers.SuspendLayout();
@@ -58,6 +58,8 @@
             this.PnlHome.SuspendLayout();
             this.PnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnExit)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlControls
@@ -82,27 +84,6 @@
             this.label1.Size = new System.Drawing.Size(138, 18);
             this.label1.TabIndex = 2;
             this.label1.Text = "Barista Beans";
-            // 
-            // Logo
-            // 
-            this.Logo.Image = global::Cafe_DeskApp.Properties.Resources.a00432a9d6e19be20e0fa5c7f87a3af5;
-            this.Logo.Location = new System.Drawing.Point(3, 3);
-            this.Logo.Name = "Logo";
-            this.Logo.Size = new System.Drawing.Size(51, 44);
-            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Logo.TabIndex = 1;
-            this.Logo.TabStop = false;
-            // 
-            // BtnExit
-            // 
-            this.BtnExit.Image = global::Cafe_DeskApp.Properties.Resources.close;
-            this.BtnExit.Location = new System.Drawing.Point(951, 3);
-            this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(46, 44);
-            this.BtnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.BtnExit.TabIndex = 0;
-            this.BtnExit.TabStop = false;
-            this.BtnExit.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // PnlTop
             // 
@@ -241,6 +222,8 @@
             // 
             // PnlMain
             // 
+            this.PnlMain.Controls.Add(this.RegistrationBtnLink);
+            this.PnlMain.Controls.Add(this.label4);
             this.PnlMain.Controls.Add(this.LoginSubmit);
             this.PnlMain.Controls.Add(this.PasswordInput);
             this.PnlMain.Controls.Add(this.label3);
@@ -307,6 +290,29 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Username";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Copperplate Gothic Bold", 12F);
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label4.Location = new System.Drawing.Point(554, 333);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(107, 18);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "New User? ";
+            // 
+            // RegistrationBtnLink
+            // 
+            this.RegistrationBtnLink.AutoSize = true;
+            this.RegistrationBtnLink.Font = new System.Drawing.Font("Copperplate Gothic Bold", 12F);
+            this.RegistrationBtnLink.Location = new System.Drawing.Point(667, 333);
+            this.RegistrationBtnLink.Name = "RegistrationBtnLink";
+            this.RegistrationBtnLink.Size = new System.Drawing.Size(137, 18);
+            this.RegistrationBtnLink.TabIndex = 13;
+            this.RegistrationBtnLink.TabStop = true;
+            this.RegistrationBtnLink.Text = "Register Here";
+            this.RegistrationBtnLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.RegistrationLink_click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Cafe_DeskApp.Properties.Resources.coffeeBanner;
@@ -316,6 +322,27 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
+            // 
+            // Logo
+            // 
+            this.Logo.Image = global::Cafe_DeskApp.Properties.Resources.a00432a9d6e19be20e0fa5c7f87a3af5;
+            this.Logo.Location = new System.Drawing.Point(3, 3);
+            this.Logo.Name = "Logo";
+            this.Logo.Size = new System.Drawing.Size(51, 44);
+            this.Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Logo.TabIndex = 1;
+            this.Logo.TabStop = false;
+            // 
+            // BtnExit
+            // 
+            this.BtnExit.Image = global::Cafe_DeskApp.Properties.Resources.close;
+            this.BtnExit.Location = new System.Drawing.Point(951, 3);
+            this.BtnExit.Name = "BtnExit";
+            this.BtnExit.Size = new System.Drawing.Size(46, 44);
+            this.BtnExit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.BtnExit.TabIndex = 0;
+            this.BtnExit.TabStop = false;
+            this.BtnExit.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // CafeWinForm
             // 
@@ -332,8 +359,6 @@
             this.Text = "Form1";
             this.PnlControls.ResumeLayout(false);
             this.PnlControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnExit)).EndInit();
             this.PnlTop.ResumeLayout(false);
             this.PnlActions.ResumeLayout(false);
             this.PnlUsers.ResumeLayout(false);
@@ -342,6 +367,8 @@
             this.PnlMain.ResumeLayout(false);
             this.PnlMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnExit)).EndInit();
             this.ResumeLayout(false);
 
 		}
@@ -368,6 +395,8 @@
 		private System.Windows.Forms.TextBox UsernameInput;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.PictureBox pictureBox1;
-	}
+        private System.Windows.Forms.LinkLabel RegistrationBtnLink;
+        private System.Windows.Forms.Label label4;
+    }
 }
 

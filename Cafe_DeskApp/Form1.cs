@@ -20,8 +20,6 @@ namespace Cafe_DeskApp
 			InitializeComponent();
 		}
 
-		
-
 		public void ucControlList (UserControl controls)
 		{
 			controls.Dock = DockStyle.Fill;
@@ -73,7 +71,11 @@ namespace Cafe_DeskApp
 
 					if (userCount == 1)
 					{
-						ucControlList(new UCHome());
+						var checkTFA = new SqlCommand("select count(1) from authenticateusers where username = @username and IsTwoFA = 1", conn);
+                        checkTFA.Parameters.AddWithValue("@username", UsernameInput.Text.ToString());
+						userCount = (int)checkTFA.ExecuteScalar();
+
+                        ucControlList(new UCHome());
 						PnlHome.BackColor = Color.MediumSeaGreen;
 						PnlTop.Visible = true;							
 					}
@@ -88,5 +90,11 @@ namespace Cafe_DeskApp
 				}
 			}
 		}
-	}
+
+        private void RegistrationLink_click(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+			LoginRegistrationForm form = new LoginRegistrationForm();
+			form.Show();
+        }
+    }
 }

@@ -101,9 +101,7 @@ namespace Cafe_DeskApp.UserControls
 				uc.SetUserdata(user);
 			}
 			controls.BringToFront();
-		}
-
-		
+		}	
 
 	}
 }
