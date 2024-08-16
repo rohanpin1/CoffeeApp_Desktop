@@ -30,22 +30,25 @@ namespace Cafe_DeskApp
 
         private void TFABtn_click(object sender, EventArgs e)
         {
-            using(var conn = DBConnection.ConnectionOpen())
+            if (!string.IsNullOrEmpty(TFACodeInput.Text))
             {
-                using(var cmd = new SqlCommand($"select count(1) from AuthenticateUsers where TwoFACode = @code and Username = @email", conn))
+                using (var conn = DBConnection.ConnectionOpen())
                 {
-                    cmd.Parameters.AddWithValue("@code", TFACodeInput.Text);
-                    cmd.Parameters.AddWithValue("@email", _email);
-                    var checkTFA =(int) cmd.ExecuteScalar();
+                    using (var cmd = new SqlCommand($"select count(1) from AuthenticateUsers where TwoFACode = @code and Username = @email", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@code", TFACodeInput.Text);
+                        cmd.Parameters.AddWithValue("@email", _email);
+                        var checkTFA = (int)cmd.ExecuteScalar();
 
-                    if(checkTFA > 0)
-                    {
-                        Close();
-                        _cafeForm.OpenUCHome();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Enter correct 2FA Code!");
+                        if (checkTFA > 0)
+                        {
+                            Close();
+                            _cafeForm.OpenUCHome();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Enter correct 2FA Code!");
+                        }
                     }
                 }
             }

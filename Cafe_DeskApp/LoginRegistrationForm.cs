@@ -44,30 +44,37 @@ namespace Cafe_DeskApp
 
         private void LoginPasswordRegisterBtn_Click(object sender, EventArgs e)
         {
-            AuthenticateUser user = new AuthenticateUser();
-            user.Email = UsernameInput.Text;
-            user.Password = PasswordInput.Text;
-            user.Is2FAEnabled = Enable2FA.Checked;
-            string json = JsonConvert.SerializeObject(user);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage res = GeneralParams.HttpCall().PostAsync($"RegisterLoginUser", content).Result;
-            if (res.StatusCode.ToString() == "OK")
+            if (!string.IsNullOrEmpty(UsernameInput.Text) && !string.IsNullOrEmpty(PasswordInput.Text) && !string.IsNullOrEmpty(ConfirmPasswordInput.Text))
             {
-                this.Controls.Clear();
-                this.InitializeComponent();
-                var check = res.Content.ReadAsStringAsync();
-                MessageBox.Show("Submitted successfully!");
+                AuthenticateUser user = new AuthenticateUser();
+                user.Email = UsernameInput.Text;
+                user.Password = PasswordInput.Text;
+                user.Is2FAEnabled = Enable2FA.Checked;
+                string json = JsonConvert.SerializeObject(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage res = GeneralParams.HttpCall().PostAsync($"RegisterLoginUser", content).Result;
+                if (res.StatusCode.ToString() == "OK")
+                {
+                    this.Controls.Clear();
+                    this.InitializeComponent();
+                    var check = res.Content.ReadAsStringAsync();
+                    MessageBox.Show("Submitted successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong!");
+                }
             }
             else
             {
-                MessageBox.Show("Something went wrong!");
+                MessageBox.Show("Please fill the form!");
             }
         }
 
         private void CnfPassword_keyup(object sender, KeyEventArgs e)
         {
             PassLabel.Visible = true;
-            if (PasswordInput.Text != ConfirmPasswordInput.Text) 
+            if (PasswordInput.Text != ConfirmPasswordInput.Text)
             {
                 PassLabel.Text = "Not Matched";
                 PassLabel.ForeColor = Color.Red;
@@ -80,7 +87,7 @@ namespace Cafe_DeskApp
                 LoginPasswordRegisterBtn.Enabled = true;
             }
         }
-            
+
         private void IsShowPassword_checked(object sender, EventArgs e)
         {
             if (IsShowPassword.Checked)
@@ -114,7 +121,7 @@ namespace Cafe_DeskApp
             string emailPattern = @"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$";
             EmailFormat.Visible = true;
 
-            if(Regex.IsMatch(UsernameInput.Text, emailPattern))
+            if (Regex.IsMatch(UsernameInput.Text, emailPattern))
             {
                 EmailFormat.Text = "Email Format is Correct!";
                 EmailFormat.ForeColor = Color.Green;

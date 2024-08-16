@@ -36,32 +36,35 @@ namespace Cafe_DeskApp
             HttpResponseMessage res = GeneralParams.HttpCall().PostAsync($"UpdateUser", content).Result;
 
             MessageBox.Show("Updated Successfully!");
-            
+
             this.Controls.Clear();
             this.InitializeComponent();
         }
 
         private void FetchData_Click(object sender, EventArgs e)
         {
-            string phoneNumber = PhoneInputBox.Text;
-            
-            HttpResponseMessage res = GeneralParams.HttpCall().GetAsync($"GetUserByPhoneNumber?phoneNumber={phoneNumber}").Result;
-
-            var users = res.Content.ReadAsStringAsync().Result;
-            var resutl = JsonConvert.DeserializeObject<Users>(users);
-            if(res.StatusCode.ToString() == "OK")
+            if (!string.IsNullOrEmpty(PhoneInputBox.Text))
             {
-                NameInput.Visible = true;
-                EmailInput.Visible = true;
-                PhoneInput.Visible = true;
-                CityInput.Visible = true;
-                EditData.Visible = true;
+                string phoneNumber = PhoneInputBox.Text;
 
-                NameInput.Text = resutl.Name;
-                EmailInput.Text = resutl.Email;
-                PhoneInput.Text = resutl.Phone;
-                CityInput.Text = resutl.City;
-                IdBox.Text = resutl.Id.ToString();
+                HttpResponseMessage res = GeneralParams.HttpCall().GetAsync($"GetUserByPhoneNumber?phoneNumber={phoneNumber}").Result;
+
+                var users = res.Content.ReadAsStringAsync().Result;
+                var resutl = JsonConvert.DeserializeObject<Users>(users);
+                if (res.StatusCode.ToString() == "OK")
+                {
+                    NameInput.Visible = true;
+                    EmailInput.Visible = true;
+                    PhoneInput.Visible = true;
+                    CityInput.Visible = true;
+                    EditData.Visible = true;
+
+                    NameInput.Text = resutl.Name;
+                    EmailInput.Text = resutl.Email;
+                    PhoneInput.Text = resutl.Phone;
+                    CityInput.Text = resutl.City;
+                    IdBox.Text = resutl.Id.ToString();
+                }
             }
         }
     }

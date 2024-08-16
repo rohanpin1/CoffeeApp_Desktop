@@ -29,7 +29,7 @@ namespace Cafe_DeskApp.UserControls
 		private void EditBtn_click(object sender, EventArgs e)
 		{
 			try
-			{
+			{				
 				Users user = new Users();
 				user.City = EditCityInput.Text;
 				user.Phone = EditPhoneInput.Text;
