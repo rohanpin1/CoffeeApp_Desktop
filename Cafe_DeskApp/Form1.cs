@@ -1,15 +1,22 @@
-﻿using Cafe_DeskApp.Services;
+﻿using Cafe_DeskApp.DTO;
+using Cafe_DeskApp.ResponseDTO;
+using Cafe_DeskApp.Services;
 using Cafe_DeskApp.UserControls;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Cafe_DeskApp
 {
@@ -64,41 +71,50 @@ namespace Cafe_DeskApp
         {
             if (!string.IsNullOrEmpty(UsernameInput.Text) && !string.IsNullOrEmpty(PasswordInput.Text))
             {
-                using (var conn = DBConnection.ConnectionOpen())
+                AuthenticateUser user = new AuthenticateUser();
+                user.Email = UsernameInput.Text;
+                user.Password = PasswordInput.Text;
+
+                string json = JsonConvert.SerializeObject(user);
+
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage res = GeneralParams.HttpCall().PostAsync("Login", content).Result;
+
+                var check = res.Content.ReadAsStringAsync();
+
+                var resModel = JsonConvert.DeserializeObject<LoginResponse>(check.Result);
+
+                if (resModel.FlagCode == 1)
                 {
-                    using (var cmd = new SqlCommand("SELECT COUNT(1) FROM authenticateusers WHERE username = @username AND password = @password", conn))
+                    var currentToken = resModel.Token;
+                    var handler = new JwtSecurityTokenHandler();
+                    var jwtToken = handler.ReadToken(currentToken) as JwtSecurityToken;
+
+                    if(jwtToken != null)
                     {
-                        cmd.Parameters.AddWithValue("@username", UsernameInput.Text.ToString());
-                        cmd.Parameters.AddWithValue("@password", PasswordInput.Text.ToString());
+                        var expiryDate = jwtToken.ValidTo;
 
-                        int userCount = (int)cmd.ExecuteScalar();
-
-                        if (userCount == 1)
-                        {
-                            var checkTFA = new SqlCommand("select count(1) from authenticateusers where username = @username and IsTwoFA = 1", conn);
-                            checkTFA.Parameters.AddWithValue("@username", UsernameInput.Text.ToString());
-                            userCount = (int)checkTFA.ExecuteScalar();
-                            if (userCount > 0)
-                            {
-                                string email = UsernameInput.Text.ToString();
-
-                                TFAform form = new TFAform(email, this);
-                                form.Show();
-                            }
-                            else
-                            {
-                                OpenUCHome();
-                            }
-                        }
-                        else
-                        {
-                            this.Controls.Clear();
-                            this.InitializeComponent();
-                            MessageBox.Show("Login Credentials Incorrect!");
-                            PnlTop.Visible = false;
-                            PnlTop.Dock = DockStyle.None;
-                        }
                     }
+
+                    if (resModel.Is2FAEnabled)
+                    {
+                        string email = UsernameInput.Text.ToString();
+                        TFAform form = new TFAform(email, this);
+                        form.Show();
+                    }
+                    else
+                    {
+                        OpenUCHome();
+                    }
+                }
+                else
+                {
+                    this.Controls.Clear();
+                    this.InitializeComponent();
+                    MessageBox.Show("Login Credentials Incorrect!");
+                    PnlTop.Visible = false;
+                    PnlTop.Dock = DockStyle.None;
                 }
             }
             else
